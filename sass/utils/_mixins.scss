@@ -1,8 +1,27 @@
 @mixin button {
-    border-radius: 15px;
-    box-shadow: 5px 5px 12px 0px rgba(50, 50, 50, 0.82);
+    position: relative;
+    cursor: pointer;
+    border-radius: $radius;
     border-width: 0;
-    background-image: linear-gradient(to right, #e28814, #d06a82, #8f5bfe);
-   
+    background-image: linear-gradient(to right, rgba(226, 136, 20, 1), rgba(208, 106, 130, 1), rgba(143, 91, 254, 1));
 
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        opacity: 0;
+        border-radius: $radius;
+        box-shadow: 5px 5px 12px 0px rgba(50, 50, 50, 0.5);
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    &:hover::after {
+        opacity: 1;
+    }
+
+  
 }

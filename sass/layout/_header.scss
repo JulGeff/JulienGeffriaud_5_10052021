@@ -4,28 +4,47 @@ header {
     align-items: center;
     width: 100%;
 
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+        flex-direction: row;
+        justify-content: space-between;
+        
+        
+    }
+
+    a {
+        padding-left: 10%;
     img {
         width: 80%;
+        @media screen and (min-width: map-get($breakpoints, tablet)) {
+            width: 20rem;
+            
+        }
+    }
     }
 
     ul {
         display: flex;
         align-items: center;
         padding: 0;
-        background-color: grey;
         margin: 0;
+        @media screen and (min-width: map-get($breakpoints, tablet)) {
+            padding-right: 10%;
+        }
 
         li {
             padding: 3rem;
-            color: white;
             white-space:nowrap;
             a {
                 display: flex;
                 align-items: center;
+                
             }
+
+          
 
             svg {
                 width: 2rem;
+                padding-left: $margin-padding-default;
             }
         }
     }

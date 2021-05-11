@@ -1,13 +1,18 @@
 footer {
-    background-color: grey;
-    color: white;
+    background-color: ivory;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 10% 10% 10%;
+    padding: 5%;
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+        margin-top: 5%;
+        
+       
+    }
 
     ul {
         display: flex;
+        align-items: center;
         padding: 0;
 
         li {
@@ -15,8 +20,15 @@ footer {
             display: flex;
             align-items: flex-end;
             padding: 0 3rem;
+
+            a {
+                display: flex;
+                align-items: center;
+                
+            }
             svg {
-                width: 2rem;
+                width: 10px;
+                padding-left: $margin-padding-default;
             }
         }
     }

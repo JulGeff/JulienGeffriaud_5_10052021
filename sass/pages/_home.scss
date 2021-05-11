@@ -1,19 +1,31 @@
 main {
     h1 {
         text-align: center;
-        padding: 0 3rem;
+        padding: 3rem;
     }
 
     ul {
         padding: 0;
         margin: 0;
+        @media screen and (min-width: map-get($breakpoints, tablet)) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
         .camera {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             position: relative;
             margin: 5% 5% 10% 5%;
-            box-shadow: -1px 3px 12px 4px rgba(0, 0, 0, .05);
-
+            box-shadow: -1px 3px 12px 4px rgba(0, 0, 0, 0.1);
             border-radius: $radius;
+            background-color: rgba(255, 255, 240, 1);
+            @media screen and (min-width: map-get($breakpoints, tablet)) {
+                margin: 1%;
+                width: 25%;
+            }
 
             &::after {
                 content: "";
@@ -25,7 +37,7 @@ main {
                 bottom: 0;
                 opacity: 0;
                 border-radius: $radius;
-                box-shadow: -1px 3px 12px 4px rgba(0, 0, 0, .2);
+                box-shadow: -1px 3px 12px 4px rgba(0, 0, 0, 0.3);
                 transition: opacity 0.3s ease-in-out;
             }
 
@@ -36,17 +48,21 @@ main {
             img {
                 width: 100%;
                 padding-bottom: $margin-padding-default;
-                border-radius: 15px;
+                border-radius: $radius;
             }
 
             &__subtitle {
                 display: flex;
                 justify-content: space-between;
-                padding: 0 $margin-padding-default $margin-padding-default $margin-padding-default;
+                padding: 0 $margin-padding-default $margin-padding-default $margin-padding-default *3;
+              
 
                 button {
-                   @include button;
-                   padding: 0 $margin-padding-default 0 $margin-padding-default;
+                    @include button;
+                    padding: 0 $margin-padding-default 0 $margin-padding-default;
+                    @media screen and (min-width: map-get($breakpoints, tablet)) {
+                        padding: 0 $margin-padding-default * 3 0 $margin-padding-default * 3;
+                    }
                 }
             }
         }

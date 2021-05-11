@@ -1,31 +1,32 @@
-main {
-    h1 {
-        text-align: center;
-        padding: 0 3rem;
+#basket {
+    main {
+        h1 {
+            text-align: center;
+            padding: 0 3rem;
+        }
+
+        h2 {
+            text-align: center;
+            padding: 2rem;
+        }
     }
 
-}
+    #form {
+        margin: auto;
+        width: 18%;
+    }
 
-.form-group {
+    .form-group {
+        padding-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-    padding-bottom: 1rem;
-    padding-left: 3rem;
-}
-
-label
-{
-    
-	display: block;
-	width: 30%;
-	float: left;
-   
-}
-
-button {
-    @include button;
-    padding: $margin-padding-default;
-    display: block;
-    margin: $margin-padding-default auto $margin-padding-default * 2 auto;
-  
-    
+    button {
+        display: block;
+        @include button;
+        padding: $margin-padding-default;
+        margin: $margin-padding-default auto $margin-padding-default * 2 auto;
+    }
 }

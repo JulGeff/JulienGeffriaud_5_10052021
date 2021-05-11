@@ -26,27 +26,34 @@
     font-family: "robotoregular";
 }
 
-
-h1
-{
+h1 {
     font-size: $font-size-big;
+    @media screen and (min-width: map-get($breakpoints, tablet)) {
+        font-size: $font-size-big * 1.5;
+    }
 }
 
-h2{
+h2 {
     font-size: $font-size-medium;
 }
 
-li, a {
-    font-family:  "robotobold";
+li,
+a {
+    font-family: "robotobold";
     font-size: $font-size-medium;
-    
 }
 
 button {
-
-    font-size: $font-size-normal;
+    font-size: $font-size-medium;
     color: white;
     font-weight: bold;
 }
 
+label {
+    font-family: "robotobold";
+    font-size: $font-size-medium;
+}
 
+input {
+    font-size: $font-size-medium;
+}
