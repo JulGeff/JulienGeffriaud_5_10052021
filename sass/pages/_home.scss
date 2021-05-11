@@ -1,0 +1,54 @@
+main {
+    h1 {
+        text-align: center;
+        padding: 0 3rem;
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        .camera {
+            position: relative;
+            margin: 5% 5% 10% 5%;
+            box-shadow: -1px 3px 12px 4px rgba(0, 0, 0, .05);
+
+            border-radius: $radius;
+
+            &::after {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                opacity: 0;
+                border-radius: $radius;
+                box-shadow: -1px 3px 12px 4px rgba(0, 0, 0, .2);
+                transition: opacity 0.3s ease-in-out;
+            }
+
+            &:hover::after {
+                opacity: 1;
+            }
+
+            img {
+                width: 100%;
+                padding-bottom: $margin-padding-default;
+                border-radius: 15px;
+            }
+
+            &__subtitle {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 $margin-padding-default $margin-padding-default $margin-padding-default;
+
+                button {
+                   @include button;
+                   padding: 0 $margin-padding-default 0 $margin-padding-default;
+                }
+            }
+        }
+    }
+}
