@@ -1,0 +1,26 @@
+.product {
+    display: flex;
+
+    img {
+        position: relative;
+        width: 50%;
+        border-radius: $radius;
+        margin-left: $margin-padding-default * 6;
+        box-shadow: -1px 3px 12px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    &__subtitle {
+        padding-left: $margin-padding-default * 3;
+        padding-right: $margin-padding-default * 6;
+
+        p {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+    }
+}
+
+button {
+    @include button;
+    padding: $margin-padding-default ;
+}
