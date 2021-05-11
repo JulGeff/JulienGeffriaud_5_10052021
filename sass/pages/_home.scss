@@ -45,7 +45,7 @@ main {
                     @include button;
                     padding: 0 $margin-padding-default 0 $margin-padding-default;
                     @media screen and (min-width: map-get($breakpoints, tablet)) {
-                        padding: 0 $margin-padding-default * 3 0 $margin-padding-default * 3;
+                        padding: 0 $margin-padding-default * 2 0 $margin-padding-default * 2;
                     }
                 }
             }
