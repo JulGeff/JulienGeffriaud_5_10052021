@@ -1,29 +1,33 @@
+let ul = document.getElementById('cameras');
+
+
 fetch('http://localhost:3000/api/cameras')
     .then((response) => response.json())
-    .then(function(cameras) {
-        addCameras(cameras)
-     })
+    .then(function (cameras) {
 
-function addCameras(cameras) {
-    cameras.forEach(function(camera) {
-        displayCamera(camera);
-    })
+
+        cameras.forEach((camera, index) => {
+            displayCamera(camera, index);
+        });
+
+    });
+
+
+function displayCamera(camera, index) {
+
+    ul.innerHTML += `
+        <li class="camera">
+        <a href="./pages/product.html?id=${camera._id}">
+            <img src="images/vcam_${index + 1}.jpg" alt="appareil photo">
+            <div class="camera__subtitle">
+                <h2>${camera.name}</h2>
+                <h2>${camera.price / 1000} €</h2>
+                <button class="buttons">
+                    + d'infos
+                </button>
+            </div>
+        </a>
+    </li>`
+
 }
 
-function displayCamera(camera) {
-    document.getElementById('camera1__name').innerHTML = camera[1].lenses;
-    // creation de ton html pour injecter une camera dans le tamplate
-    // Toujours avec le même princique que tu as fais pour ajouter les element dans ton html
-    
-}
-
-
-
-
-
-//test modif texte bouton 1 au clic
-var elt = document.getElementsByClassName('buttons')[0];
-elt.addEventListener('click', function () {          // On écoute l'événement click
-        elt.innerHTML = "Ajouté à votre panier";
-
-})

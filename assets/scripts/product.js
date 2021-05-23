@@ -1,9 +1,42 @@
-// TEST JS
-var elt = document.getElementsByClassName('buttons')[0];
-elt.addEventListener('click', function () {          // On écoute l'événement click
-        elt.innerHTML = "Ajouté à votre panier";     // On change le contenu de notre élément 
-    });
-// FIN TEST
+let prodid = location.search.substr(1);
+let main = document.getElementById('main');
+
+fetch('http://localhost:3000/api/cameras')
+    .then((response) => response.json())
+    .then(function (cameras) {
+        for (var i = 0; i < cameras.length; i++) {
+            if (cameras[i]._id = prodid) {
+                main.innerHTML += `
+                
+        <h1>Craquez pour le ${cameras[i].name}!</h1>
+        <section>
+            <div class=product>
+                <img src="../images/vcam_${i + 1}.jpg" alt="appareil photo">
+                <div class=product__subtitle>
+                    <h2>${cameras[i].name}</h2>
+                    <p>${cameras[i].description}</p>
+
+                    <label for="options">Lentilles</label>
+
+                    <select name="lenses" id="lenses-select">
+                        <option value="">--choisissez une option--</option>
+                        <option value="lense_1">${cameras[i].lenses[0]}</option>
+                        <option value="lense_2">${cameras[i].lenses[1]}}</option>
+                        <option value="lense_3">${cameras[i].lenses[2]}</option>
+                    </select>
 
 
-        
+                    <p>Prix : ${cameras[i].price / 1000} €</p>
+                    <p>Référence produit : ${cameras[i]._id}</p>
+                    
+                    <button type="button" class="buttons">
+                        Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </li>`
+
+            }}});
+
+
+
