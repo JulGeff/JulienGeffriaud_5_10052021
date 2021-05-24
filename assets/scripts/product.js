@@ -11,7 +11,7 @@ fetch('http://localhost:3000/api/cameras')
             console.log (cameras[i]._id); 
             if (id === cameras[i]._id) { //comparaison de l'ID situé dans l'url avec les ID du fichier json issu de l'API
                 
-                // Quand ID correspondant avec clui de l'URL, insertion de la fiche produit
+                // Quand ID correspondant avec clui de l'URL, insertion de la fiche produit ci-dessous
                 main.innerHTML += `
                 <h1>Craquez pour le ${cameras[i].name}!</h1>
                 <section>
@@ -21,32 +21,47 @@ fetch('http://localhost:3000/api/cameras')
                             <h2>${cameras[i].name}</h2>
                             <p>${cameras[i].description}</p>
 
-                            <label for="options">Lentilles</label>
+                            <p>
+                            <label for="options">Lentilles : </label>
                             <select name="lenses" id="lenses-select">
                                 <option value="">--choisissez une option--</option>
                                 
                             </select>
-
-                            <p>Prix : ${cameras[i].price / 1000} €</p>
-                            
-                            <button type="button" class="buttons">
+                            </p>
+                            <p>
+                            <label for="q">Quantité : </label>
+                            <select id="qt" name="q">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                            </select>
+                            </p>
+                            <button type="button" div=${cameras[i].id}>
                                 Ajouter au panier
                             </button>
                         </div>
                     </div>
                 </li>`
 
+
                 // Insertion des options de lenses pour chaque appareil 
-                cameras[i].lenses.forEach((lens) => {
-                    function displayLensOption(lens) {
-                        let lensesOptions = document.getElementById('lenses-select');
-                                              
+                cameras[i].lenses.forEach((lens, index) => {
+                    function displayLensOption(lens, index) {
+                        let lensesOptions = document.getElementById('lenses-select');    
                             lensesOptions.innerHTML += 
-                            `<option>${cameras[i].lenses.lens}</option>`
+                            `<option>${cameras[i].lenses[index]}</option>`
                         };
-                        displayLensOption()
+                        displayLensOption(lens, index)
                 })
             }}});
+
+
 
 
            
