@@ -9,12 +9,12 @@ fetch(`http://localhost:3000/api/cameras/${id}`) // récupération de l'ID situ�
         console.log(camera);
         productPage(camera);  // création de la fiche produit
         lensesOptions(camera);// affichage des options de lenses
-        storeQt();             // au clic sur "Ajouter au panier", enregistrement clé id / qt dans local storage
+        basket(camera);
     })
 
 //FONCTIONS APPELEES
 // création de la fiche produit
-function productPage(camera) {
+function productPage(camera, index) {
     main.innerHTML += `
         <h1>Craquez pour le ${camera.name}!</h1>
         <section>
@@ -65,52 +65,52 @@ function lensesOptions(camera) {
     })
 }
 
-
 //AJOUT AU PANIER
 // Récupération option choisie
-function chosenOption(option) {
+function chosenOption() {
+   
     let opt = document.getElementById("lenses-select");
-    opt.addEventListener('change', function () {
-        let option = opt[opt.selectedIndex].text;
-        console.log("Option choisie : " + option);
-  
-
-
-    })
+    let option = opt[opt.selectedIndex].text;
+    return option;
+   
 };
-
 
 // Récupération quantité choisie
 function chosenQt() {
     let qt = document.getElementById("qt");
-    qt.addEventListener('change', function () {
-        let quantity = qt.selectedIndex + 1;
-        console.log("Quantité choisie : " + quantity);
+    let quantity = qt.selectedIndex + 1;
+    return quantity;
 
-    })
 };
 
 
 // Stockage de l'ID, option et de la quantité associée dans localStorage
-function storeQt(quantity, option) {
-chosenQt();
-chosenOption();
+function basket(camera) {
+
+    const button = document.getElementById('button');     // On récupère l'élément sur lequel on veut détecter le clic
+    button.addEventListener('click', function () {        // On écoute l'événement click
+        let option = chosenOption();                      // On enregistre l'option sélectionnée
+        let quantity = chosenQt();                        // On enregistre la quantité sélectionnée
 
 
-    let product = {
-        id: id,
-        option: option,
-        quantity: quantity,
-    }
-    
-
-    const button = document.getElementById('button');                  // On récupère l'élément sur lequel on veut détecter le clic
-    button.addEventListener('click', function () { 
-        console.log(product);                    // On écoute l'événement click
-        window.localStorage.setItem(id, JSON.stringify(product)); // On stocke la chaîne id option / qt dans le local storage
-        let prod = document.getElementById("product__subtitle"); // On écrit "Produit ajouté au panier !" sous le bouton
+        let prod = document.getElementById("product__subtitle"); 
         let newp = document.createElement("p");
-        prod.appendChild(newp).innerHTML = "Produit ajouté au panier";
+        newp.setAttribute("id", "verif_message")
+        prod.appendChild(newp).innerHTML = "";
+
+        if (document.getElementById("lenses-select").selectedIndex === 0) { 
+        
+            document.getElementById("verif_message").innerHTML = "Veuillez sélectionner une option"; 
+            // si pas d'option choisie, on retourne "Veuillez choisir une option"
+        } else {                                
+    
+            document.getElementById("verif_message").innerHTML = "Produit ajouté au panier";          
+            // si option choisie, on retourne "Produit ajouté" et on stocke dans localStorage
+            let product = {id:id, cam:camera.name, option:option, quantity:quantity, price:camera.price / 1000};
+            localStorage.setItem(id, JSON.stringify(product));       
+            // on stocke données produit dans localStorage       
+        }  
+
     })
 };
 

@@ -9,6 +9,23 @@
             text-align: center;
             padding: 2rem;
         }
+
+        table {
+            
+            border : black 1px solid;
+           
+            width:50%;
+            margin: auto;
+            border-collapse: collapse;
+            th, td { border : rgb(228, 195, 195) 1px solid;}
+            th {
+                color : white;
+                background-color: grey;
+            }
+
+       
+        
+        }
     }
 
     #form {
