@@ -12,14 +12,15 @@ fetch(`http://localhost:3000/api/cameras/${id}`) // récupération de l'ID situ�
         basket(camera);
     })
 
+    
 //FONCTIONS APPELEES
-// création de la fiche produit
+// création de la fiche produit dans le code HTML
 function productPage(camera, index) {
     main.innerHTML += `
         <h1>Craquez pour le ${camera.name}!</h1>
         <section>
             <div class=product>
-                <img src="../images/vcam_1.jpg" alt="appareil photo">
+                <img src="${camera.imageUrl}" alt="appareil photo">
                 <div class="product__subtitle" id="product__subtitle">
                     <h2>Description du ${camera.name}</h2>
                     <p>${camera.description}</p>
@@ -113,4 +114,10 @@ function basket(camera) {
 
     })
 };
+
+
+/*Pour les routes POST, l’objet contact envoyé au serveur doit contenir les champs
+firstName, lastName, address, city et email. Le tableau des produits envoyé au
+backend doit être un array de strings product_id. Les types de ces champs et leur
+présence doivent être validés avant l’envoi des données au serveur*/
 

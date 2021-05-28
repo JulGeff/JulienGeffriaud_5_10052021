@@ -6,9 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/style.css">
-
-
-
 </head>
 
 <body id="basket">
@@ -35,12 +32,13 @@
     <main>
 
         <h1>Vérifiez le contenu de votre panier</h1>
-        <section id="basket">
+        <section id="basket__main">
          
                 <table id="basket__content">
                     <thead>
                         <tr>
-                            <th>Produit</th>
+                            <th>Référence</th>
+                            <th>Nom du produit</th>
                             <th>Option</th>
                             <th>Quantité</th>
                             <th>PU</th>
@@ -63,17 +61,17 @@
                     <input id="first_name" class="form-control" type="text" maxlength="40" required />
                 </div>
                 <div class="form-group">
-                    <label for="name">
+                    <label for="last_name">
                         Nom
                     </label>
                     <input id="name" class="form-control" type="text" maxlength="40" required />
                 </div>
 
                 <div class="form-group">
-                    <label for="adress">
+                    <label for="address">
                         Adresse
                     </label>
-                    <input id="adress" class="form-control" type="text" maxlength="40" required />
+                    <input id="address" class="form-control" type="text" maxlength="40" required />
                 </div>
 
                 <div class="form-group">
@@ -90,7 +88,7 @@
                     <input id="email" class="form-control" type="email" maxlength="40" required />
                 </div>
 
-                <button type="submit">
+                <button type="submit" id="submit" formaction="http://localhost:3000/api/cameras/order/">
                     Valider votre commande
                 </button>
             </form>

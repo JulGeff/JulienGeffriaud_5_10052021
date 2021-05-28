@@ -18,7 +18,7 @@ function displayCamera(camera, index) {
     ul.innerHTML += `
         <li class="camera">
         <a href="./pages/product.html?id=${camera._id}">
-            <img src="images/vcam_${index + 1}.jpg" alt="appareil photo">
+            <img src="${camera.imageUrl}" alt="appareil photo">
             <div class="camera__subtitle">
                 <h2>${camera.name}</h2>
                 <h2>${camera.price / 1000} €</h2>

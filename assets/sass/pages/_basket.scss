@@ -12,15 +12,21 @@
 
         table {
             
-            border : black 1px solid;
+            
+            text-align: center;
            
             width:50%;
             margin: auto;
             border-collapse: collapse;
-            th, td { border : rgb(228, 195, 195) 1px solid;}
+
             th {
                 color : white;
                 background-color: grey;
+            }
+
+            .delete {
+               text-decoration: underline ;
+              font-size: .8rem;
             }
 
        
