@@ -11,38 +11,38 @@
         }
 
         table {
-            
-            
             text-align: center;
-           
-            width:50%;
+
+            width: 50%;
             margin: auto;
             border-collapse: collapse;
 
             th {
-                color : white;
+                color: white;
                 background-color: grey;
             }
 
-            .delete {
-               text-decoration: underline ;
-              font-size: .8rem;
-
-            
-            }
-
-       
         
+
+            .delete {
+                
+                font-size: 0.5rem;
+                border : red 1px solid;;
+                color : white;
+                border-radius: 50%;
+                background-color: red;
+                font-weight: bold;
+                cursor: pointer;
+            }
         }
     }
 
     #form {
         margin: auto;
-        width : 22%;
+        width: 22%;
 
         input {
-
-            width : 250px;
+            width: 250px;
         }
     }
 
@@ -51,11 +51,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-
-        
     }
 
-    button {
+    #submit {
         display: block;
         @include button;
         padding: $margin-padding-default;

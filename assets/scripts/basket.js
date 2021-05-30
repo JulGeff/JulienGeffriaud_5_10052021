@@ -53,7 +53,7 @@ basketLine.innerHTML +=
     </td>        
     <td class="price">${newLine.price} €</td>
     <td>${(newLine.price * newLine.quantity).toFixed(2)} €</td>
-    <td><button class="delete">Retirer du panier</button></td>
+    <td><button class="delete">X</button></td>
 </tr>`;
 }
 

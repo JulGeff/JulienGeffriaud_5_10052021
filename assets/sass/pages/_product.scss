@@ -1,6 +1,11 @@
 .product {
     display: flex;
 
+    button {
+        @include button;
+        padding: $margin-padding-default ;
+    }
+
     img {
         position: relative;
         width: 50%;
@@ -20,7 +25,4 @@
     }
 }
 
-button {
-    @include button;
-    padding: $margin-padding-default ;
-}
+
