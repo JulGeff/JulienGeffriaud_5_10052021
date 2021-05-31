@@ -7,6 +7,7 @@ header {
     @media screen and (min-width: map-get($breakpoints, tablet)) {
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         
         
     }
@@ -14,11 +15,18 @@ header {
     a {
         padding-left: 10%;
     img {
-        width: 80%;
+        width: 60%;
         @media screen and (min-width: map-get($breakpoints, tablet)) {
             width: 12rem;
-            
         }
+        @media screen and (max-width: map-get($breakpoints, tablet)) {
+            padding : 0;
+            width: 80%;
+        }
+
+
+
+
     }
     }
 

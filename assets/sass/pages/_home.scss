@@ -2,6 +2,10 @@ main {
     h1 {
         text-align: center;
         padding: 3rem;
+
+        @media screen and (max-width: map-get($breakpoints, tablet)) {
+            padding: 0;
+        }
     }
 
     ul {
@@ -38,8 +42,7 @@ main {
             &__subtitle {
                 display: flex;
                 justify-content: space-between;
-                padding: 0 $margin-padding-default $margin-padding-default $margin-padding-default *3;
-              
+                padding: 0 $margin-padding-default $margin-padding-default $margin-padding-default * 3;
 
                 button {
                     @include button;

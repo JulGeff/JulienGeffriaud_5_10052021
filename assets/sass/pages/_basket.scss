@@ -11,52 +11,88 @@
         }
 
         table {
-            text-align: center;
-
+            font-size: 0.8rem;
             width: 50%;
             margin: auto;
             border-collapse: collapse;
+            @media screen and (max-width: map-get($breakpoints, tablet)) {
+                width: 80%;
+            }
 
             th {
-                color: white;
-                background-color: grey;
+                text-align: left;
+                @media screen and (max-width: map-get($breakpoints, tablet)) {
+                    display: none;
+                }
             }
 
-        
+            td {
+                @media screen and (max-width: map-get($breakpoints, tablet)) {
+                    display: block;
+                    text-align: right;
+                }
 
-            .delete {
-                
-                font-size: 0.5rem;
-                border : red 1px solid;;
-                color : white;
-                border-radius: 50%;
-                background-color: red;
-                font-weight: bold;
-                cursor: pointer;
+                &::before {
+                    @media screen and (max-width: map-get($breakpoints, tablet)) {
+                        content: attr(data-label);
+                        font-weight: bold;
+                        float: left;
+                    }
+                }
+            }
+
+            .id {
+                @media screen and (max-width: map-get($breakpoints, tablet)) {
+                    padding-top: 2rem;
+                }
             }
         }
-    }
 
-    #form {
-        margin: auto;
-        width: 22%;
+        .delete {
+            font-size: 0.5rem;
+            border: red 2px solid;
+            color: red;
+            background-color: white;
+            border-radius: 15px;
+            font-weight: bold;
+            font-family: Arial;
+            cursor: pointer;
+            @media screen and (max-width: map-get($breakpoints, tablet)) {
+                display: inline;
+            }
+        }
 
-        input {
-            width: 250px;
+        button {
+            display: block;
         }
     }
+}
 
-    .form-group {
-        padding-bottom: 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+#form {
+    margin: auto;
+    width: 22%;
+    @media screen and (max-width: map-get($breakpoints, tablet)) {
+        width: 80%;
     }
 
-    #submit {
-        display: block;
-        @include button;
-        padding: $margin-padding-default;
-        margin: $margin-padding-default auto $margin-padding-default * 2 auto;
+    input {
+        width: 250px;
+        @media screen and (max-width: map-get($breakpoints, tablet)) {
+            width: 60%;
+        }
     }
+}
+
+.form-group {
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#submit {
+    display: block;
+    @include button;
+    padding: $margin-padding-default;
+    margin: $margin-padding-default auto $margin-padding-default * 2 auto;
 }

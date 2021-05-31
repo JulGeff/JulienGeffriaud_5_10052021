@@ -1,9 +1,28 @@
+
+
+
+
 .product {
     display: flex;
 
+    @media screen and (max-width: map-get($breakpoints, tablet)) {
+        flex-direction: column;
+      
+    }
+    
+    #verif_message {
+
+        text-align: center
+    }
+
+
     button {
+        
         @include button;
-        padding: $margin-padding-default ;
+        padding: $margin-padding-default;
+        display: block;
+        margin : auto;
+        
     }
 
     img {
@@ -12,11 +31,19 @@
         border-radius: $radius;
         margin-left: $margin-padding-default * 6;
         box-shadow: -1px 3px 12px 4px rgba(0, 0, 0, 0.1);
+        @media screen and (max-width: map-get($breakpoints, tablet)) {
+            margin: 0;
+            width: 100%;
+            border-radius: 0;
+        }
     }
 
     &__subtitle {
         padding-left: $margin-padding-default * 3;
         padding-right: $margin-padding-default * 6;
+        @media screen and (max-width: map-get($breakpoints, tablet)) {
+            padding: $margin-padding-default;
+        }
 
         p {
             text-align: justify;
@@ -24,5 +51,3 @@
         }
     }
 }
-
-

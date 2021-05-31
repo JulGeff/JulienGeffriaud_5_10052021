@@ -46,18 +46,18 @@ function displayBasket() {
 function tableFulfill (newLine) { 
     basketLine.innerHTML +=                 
     `<tr>
-        <td class="id">${newLine.id}</td>
-        <td class="product">${newLine.cam}</td>
-        <td class="option">${newLine.option}</td>
-        <td>
+        <td class="id" data-label="Référence">${newLine.id}</td>
+        <td class="product" data-label="Produit">${newLine.cam}</td>
+        <td class="option" data-label="Option">${newLine.option}</td>
+        <td data-label="Quantité">
             <label for="qt"></label>
                 <select class="qt" name="q">
                     <option value="selected" selected>${newLine.quantity}</option>
                 </select>
         </td>        
-        <td class="price">${newLine.price} €</td>
-        <td>${(newLine.price * newLine.quantity).toFixed(2)} €</td>
-        <td><button class="delete">X</button></td>
+        <td class="price" data-label="Prix unitaire">${newLine.price} €</td>
+        <td data-label="Total article">${(newLine.price * newLine.quantity).toFixed(2)} €</td>
+        <td><button class="delete" >X</button></td>
     </tr>`;
     }
 
@@ -139,7 +139,6 @@ function newQt() {
                 let price = pricePos.innerText.slice(0, -2);
                 let product = {id:id, cam:cam, option:option, quantity:quantity, price:price};
             
-
                 localStorage.setItem(id, JSON.stringify(product)); // envoie la nouvelle quantité dans le local storage          
                 location.reload() //recharge la page
           
