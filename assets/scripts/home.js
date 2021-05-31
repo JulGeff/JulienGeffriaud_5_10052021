@@ -14,7 +14,6 @@ fetch('http://localhost:3000/api/cameras')
 
 
 function displayCamera(camera, index) {
-
     ul.innerHTML += `
         <li class="camera">
         <a href="./pages/product.html?id=${camera._id}">

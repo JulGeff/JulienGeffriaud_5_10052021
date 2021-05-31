@@ -98,18 +98,22 @@ function basket(camera) {
         let newp = document.createElement("p");
         newp.setAttribute("id", "verif_message")
         prod.appendChild(newp).innerHTML = "";
+        let product = {id:id, cam:camera.name, option:option, quantity:quantity, price:camera.price / 1000};
 
         if (document.getElementById("lenses-select").selectedIndex === 0) { 
         
             document.getElementById("verif_message").innerHTML = "Veuillez sélectionner une option"; 
             // si pas d'option choisie, on retourne "Veuillez choisir une option"
-        } else {                                
-    
-            document.getElementById("verif_message").innerHTML = "Produit ajouté au panier";          
-            // si option choisie, on retourne "Produit ajouté" et on stocke dans localStorage
-            let product = {id:id, cam:camera.name, option:option, quantity:quantity, price:camera.price / 1000};
-            localStorage.setItem(id, JSON.stringify(product));       
-            // on stocke données produit dans localStorage       
+        } else {       
+            
+            if(localStorage.getItem(id, JSON.stringify(product)) === null) {
+            localStorage.setItem(id, JSON.stringify(product));   // si option choisie, on stocke données produit dans localStorage       
+            document.getElementById("verif_message").innerHTML = "Produit ajouté au panier"; // on retourne "Produit ajouté" et on stocke dans localStorage
+            
+                } else {
+                document.getElementById("verif_message").innerHTML = "Produit déjà ajouté au panier"; // si id déjà stocké dans local storage, remonter message "déjà ajouté au panier"
+        }
+            
         }  
 
     })

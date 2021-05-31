@@ -35,7 +35,7 @@ function displayBasket() {
             total (newLine);
         })
         
-        addQtChoices();
+        
     }
 }
 
@@ -88,6 +88,7 @@ function addQtChoices() { // Ajout du menu déroulant de sélection de quantité
     }
 }
 
+addQtChoices();
 
 let basketLines =  document.getElementsByClassName("id");
 
@@ -142,4 +143,75 @@ location.reload() //recharge la page à chaque suppression de ligne du panier
 basketDelete ();
 
 
+//Création de l'objet à envoyer au serveur
+
+let firstName = document.getElementById("first_name").innerText;
+let lastName = document.getElementById("last_name").innerText;
+let address = document.getElementById("address").innerText;
+let city = document.getElementById("city").innerText;
+let email = document.getElementById("email").innerText;
+   
+    
+let contact = {     //création de l'objet contact regroupant les coordonnées du client
+
+firstName : firstName,
+lastName : lastName,
+address : address,
+city : city,
+email : email,
+
+}
+
+let order = [];
+
+function orderStorage() {       // Récupération des ID de la commande dans le localStorage
+    keys = Object.keys(localStorage), 
+        i = keys.length;
+
+    while (i--) {
+        order.push(JSON.parse(basketData[i]).id);
+   
+        
+    }
+    
+}
+orderStorage()
+
+
+let orderPack = { contact, order }
+console.log(orderPack);
+
+
+
 //Envoi des données du panier à l'API
+/*Pour les routes POST, l’objet contact envoyé au serveur doit contenir les champs
+firstName, lastName, address, city et email. Le tableau des produits envoyé au
+backend doit être un array de strings product_id. Les types de ces champs et leur
+présence doivent être validés avant l’envoi des données au serveur*/
+
+
+
+function send(e) {
+    e.preventDefault();
+    fetch("http://localhost:3000/api/cameras/order", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json', 
+        'Content-Type': 'application/json'
+      },
+      body : JSON.stringify(orderPack)
+    })
+    .then(function(res) {
+      if (res.ok) {
+        console.log(res.json)
+        
+      }
+      
+    })
+    
+  }
+  
+  document
+    .getElementById("form")
+    .addEventListener("submit", send);
+  
