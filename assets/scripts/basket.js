@@ -35,36 +35,42 @@ function displayBasket() {
             total (newLine);
         })
         
-        
+        addQtChoices(); 
+    } 
+}
+
+
+//FONCTIONS APPELLES DANS displayBasket()
+
+//Création d'une nouvelle ligne de table html 
+function tableFulfill (newLine) { 
+    basketLine.innerHTML +=                 
+    `<tr>
+        <td class="id">${newLine.id}</td>
+        <td class="product">${newLine.cam}</td>
+        <td class="option">${newLine.option}</td>
+        <td>
+            <label for="qt"></label>
+                <select class="qt" name="q">
+                    <option value="selected" selected>${newLine.quantity}</option>
+                </select>
+        </td>        
+        <td class="price">${newLine.price} €</td>
+        <td>${(newLine.price * newLine.quantity).toFixed(2)} €</td>
+        <td><button class="delete">X</button></td>
+    </tr>`;
     }
-}
-
-function tableFulfill (newLine) { //Création d'une nouvelle ligne de table html 
-basketLine.innerHTML +=                 
-`<tr>
-    <td class="id">${newLine.id}</td>
-    <td class="product">${newLine.cam}</td>
-    <td class="option">${newLine.option}</td>
-    <td>
-        <label for="qt"></label>
-            <select class="qt" name="q">
-                <option value="selected" selected>${newLine.quantity}</option>
-            </select>
-    </td>        
-    <td class="price">${newLine.price} €</td>
-    <td>${(newLine.price * newLine.quantity).toFixed(2)} €</td>
-    <td><button class="delete">X</button></td>
-</tr>`;
-}
 
 
-function total (newLine)  { //Calcul et affichage du coût total
-totalCost = totalCost + (newLine.price * newLine.quantity);
-basket.appendChild(newh2).innerHTML = `Le montant total de votre commande est de ${totalCost.toFixed(2)} €`; // affiche le total de la commande
-}
+//Calcul et affichage du coût total
+function total (newLine)  { 
+    totalCost = totalCost + (newLine.price * newLine.quantity);
+    basket.appendChild(newh2).innerHTML = `Le montant total de votre commande est de ${totalCost.toFixed(2)} €`; // affiche le total de la commande
+    }
 
 
-function addQtChoices() { // Ajout du menu déroulant de sélection de quantité
+// Ajout du menu déroulant de sélection de quantité
+function addQtChoices() { 
     for (let i = 0; i < qt.length; i++) {
 
         let quantity = qt[i].selectedOptions[0].text;
@@ -88,21 +94,37 @@ function addQtChoices() { // Ajout du menu déroulant de sélection de quantité
     }
 }
 
-addQtChoices();
+//FIN DES FONCTIONS APPELLES DANS displayBasket()
 
+
+//MISE A JOUR DU PANIER - Suppression ligne de commande & modification quantité de commande
 let basketLines =  document.getElementsByClassName("id");
 
-function newQt() { //Enregistrement événement modification de quantité
+//Suppression d'une ligne du panier au clic sur "Retirer du panier"
+function basketDelete () { 
+    let id = document.getElementsByClassName("id")
+    let lineDeletion = document.getElementsByClassName("delete")
+
+    for (let i = 0; i < basketLines.length; i++)
+    lineDeletion[i].addEventListener('click', function () {
+    localStorage.removeItem(id[i].innerText);
+    location.reload() //recharge la page à chaque suppression de ligne du panier
+
+    })}
+
+basketDelete ();
+
+//Enregistrement événement modification de quantité dans le local storage
+function newQt() { 
 
     for (let i = 0; i < qt.length; i++) {
-        let quantity = qt[i].selectedOptions[0].text;
-
-        qt[i].addEventListener('change', function () {
-
-            let newQuantity = qt[i].selectedOptions[0].text;
             
+
+        qt[i].addEventListener('change', function () { //on écoute si modification d'option sur le menu déroulant "quantité"
+            let newQuantity = qt[i].selectedOptions[0].text;
+            console.log(newQuantity)
                     
-            for (let i = 0; i < basketLines.length; i++) {
+            for (let j = 0; j < basketLines.length; j++) {
         
                 let idPos = document.getElementsByClassName("id")[i];
                 let camPos = idPos.nextElementSibling;
@@ -115,11 +137,11 @@ function newQt() { //Enregistrement événement modification de quantité
                 let option = optionPos.innerText;
                 let quantity = newQuantity;
                 let price = pricePos.innerText.slice(0, -2);
-            
                 let product = {id:id, cam:cam, option:option, quantity:quantity, price:price};
+            
 
                 localStorage.setItem(id, JSON.stringify(product)); // envoie la nouvelle quantité dans le local storage          
-                location.reload() //recharge la page à chaque modification de quantité
+                location.reload() //recharge la page
           
             }           
         })
@@ -129,21 +151,15 @@ function newQt() { //Enregistrement événement modification de quantité
 newQt();
 
 
-function basketDelete () { //Suppression d'une ligne du panier au clic sur "Retirer du panier"
-let id = document.getElementsByClassName("id")
-let lineDeletion = document.getElementsByClassName("delete")
-
-for (let i = 0; i < basketLines.length; i++)
-lineDeletion[i].addEventListener('click', function () {
-localStorage.removeItem(id[i].innerText);
-location.reload() //recharge la page à chaque suppression de ligne du panier
-
-})}
-
-basketDelete ();
 
 
-//Création de l'objet à envoyer au serveur
+//FIN MISE A JOUR DU PANIER
+
+
+
+//ENVOI DE LA COMMANDE A l'API
+
+//Création de l'objet à envoyer
 
 let firstName = document.getElementById("first_name").innerText;
 let lastName = document.getElementById("last_name").innerText;
