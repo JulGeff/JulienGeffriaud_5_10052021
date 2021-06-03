@@ -10,16 +10,20 @@
             padding: 2rem;
         }
 
+        p {
+            text-align: center;
+        }
+
         table {
             font-size: 0.8rem;
             width: 50%;
             margin: auto;
             border-collapse: collapse;
-            
+            text-align: center;
+
             @media screen and (max-width: map-get($breakpoints, tablet-landscape)) {
                 width: 80%;
             }
-           
 
             th {
                 text-align: left;
@@ -60,9 +64,7 @@
             font-family: Arial;
             cursor: pointer;
             @media screen and (max-width: map-get($breakpoints, mobile)) {
-                    display: inline;
-                 
-                
+                display: inline;
             }
         }
 
@@ -87,7 +89,6 @@
         @media screen and (max-width: map-get($breakpoints, tablet-landscape)) {
             width: 65%;
         }
-        
     }
 }
 
