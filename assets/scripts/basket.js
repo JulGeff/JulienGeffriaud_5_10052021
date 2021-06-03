@@ -1,9 +1,9 @@
 let basketData = [];
 
-// Récupération dans un array de toutes les données stockées dans localStorage
+// Get all localStorage data in a single array
 function allStorage() {
-
-    keys = Object.keys(localStorage), // à recreuser
+   
+    keys = Object.keys(localStorage),
         i = keys.length;
 
     while (i--) {
@@ -11,14 +11,18 @@ function allStorage() {
     }
 }
 
+
+
 allStorage();
 
 let basketEntry = document.getElementById('basket__content');
 let basket = document.getElementById("basket__main");
 let totalCost = 0;
 let newh2 = document.createElement("h2");
+let newp = document.createElement("p");
 let qt = document.getElementsByClassName("qt");
 let basketLine = document.getElementById("table_body");
+let submit = document.getElementById("submit");
 
 displayBasket();
 
@@ -74,8 +78,7 @@ function addQtChoices() {
     for (let i = 0; i < qt.length; i++) {
 
         let quantity = qt[i].selectedOptions[0].text;
-        console.log(quantity);
-        console.log(qt)
+    
 
         for (let j = 1; j < 10; j++) {
 
@@ -142,14 +145,15 @@ function newQt() {
                 localStorage.setItem(id, JSON.stringify(product)); // envoie la nouvelle quantité dans le local storage          
                 location.reload() //recharge la page
           
-            }           
+            }   
+        
         })
+       
     };
+   
 }
 
 newQt();
-
-
 
 
 //FIN MISE A JOUR DU PANIER
@@ -158,73 +162,68 @@ newQt();
 
 //ENVOI DE LA COMMANDE A l'API
 
-//Création de l'objet à envoyer
+// Récupération des ID de la commande dans le localStorage
+let products = []; 
 
-let firstName = document.getElementById("first_name").innerText;
-let lastName = document.getElementById("last_name").innerText;
-let address = document.getElementById("address").innerText;
-let city = document.getElementById("city").innerText;
-let email = document.getElementById("email").innerText;
-   
-    
-let contact = {     //création de l'objet contact regroupant les coordonnées du client
-
-firstName : firstName,
-lastName : lastName,
-address : address,
-city : city,
-email : email,
-
-}
-
-let order = [];
-
-function orderStorage() {       // Récupération des ID de la commande dans le localStorage
+function orderStorage() {       
     keys = Object.keys(localStorage), 
         i = keys.length;
 
-    while (i--) {
-        order.push(JSON.parse(basketData[i]).id);
-   
-        
-    }
-    
+    while (i--) {  
+        products.push(JSON.parse(basketData[i]).id);
+     
+    }  
 }
-orderStorage()
-
-
-let orderPack = { contact, order }
-console.log(orderPack);
 
 
 
 //Envoi des données du panier à l'API
-/*Pour les routes POST, l’objet contact envoyé au serveur doit contenir les champs
-firstName, lastName, address, city et email. Le tableau des produits envoyé au
-backend doit être un array de strings product_id. Les types de ces champs et leur
-présence doivent être validés avant l’envoi des données au serveur*/
-
-
 
 function send(e) {
-    e.preventDefault();
+ 
+    orderStorage()
+    if (products.length === 0) {
+        e.preventDefault();
+        document.getElementById("contact").appendChild(newp).innerHTML = "Votre panier est vide ! <br> Veuillez sélectionner un produit"
+
+    } else {
+    
+    let firstName = document.getElementById("first_name").value;
+    let lastName = document.getElementById("last_name").value;
+    let address = document.getElementById("address").value;
+    let city = document.getElementById("city").value;
+    let email = document.getElementById("email").value;
+    let contact = {     
+        firstName : firstName,
+        lastName : lastName,
+        address : address,
+        city : city,
+        email : email,
+    }
+
+    let order = { contact : contact, products : products }
+    
+    
     fetch("http://localhost:3000/api/cameras/order", {
       method: "POST",
       headers: {
         'Accept': 'application/json', 
         'Content-Type': 'application/json'
       },
-      body : JSON.stringify(orderPack)
+
+      body : JSON.stringify(order)
     })
-    .then(function(res) {
-      if (res.ok) {
-        console.log(res.json)
+    .then((response) => response.json())
+    .then((json) => {
         
-      }
+      let orderResponse = { orderRef : json.orderId ,totalCost : totalCost, firstName : firstName }
+      localStorage.clear ()
+      localStorage.setItem("order", JSON.stringify(orderResponse))
       
     })
+   
     
-  }
+  }  } 
   
   document
     .getElementById("form")

@@ -11,10 +11,11 @@ main {
     ul {
         padding: 0;
         margin: 0;
-        @media screen and (min-width: map-get($breakpoints, tablet)) {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        @media screen and (max-width: map-get($breakpoints, tablet)) {
+            flex-direction: column;
         }
 
         .camera {
@@ -22,11 +23,23 @@ main {
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            margin: 5% 5% 10% 5%;
+            margin: 0 3% 3% 3%;
             box-shadow: -1px 3px 12px 4px rgba(0, 0, 0, 0.1);
             border-radius: $radius;
             background-color: rgba(255, 255, 240, 1);
-            @media screen and (min-width: map-get($breakpoints, tablet)) {
+            width: 22%;
+
+            @media screen and (max-width: map-get($breakpoints, tablet)) {
+                width: 80%;
+              
+            }
+
+            @media screen and (min-width: map-get($breakpoints, tablet)) and (max-width: map-get($breakpoints, tablet-landscape)) {
+                margin: 1%;
+                width: 40%;
+            }
+
+            @media screen and (min-width: map-get($breakpoints, tablet-landscape)) {
                 margin: 1%;
                 width: 25%;
             }
@@ -42,13 +55,17 @@ main {
             &__subtitle {
                 display: flex;
                 justify-content: space-between;
+
                 padding: 0 $margin-padding-default $margin-padding-default $margin-padding-default * 3;
 
                 button {
                     @include button;
                     padding: 0 $margin-padding-default 0 $margin-padding-default;
-                    @media screen and (min-width: map-get($breakpoints, tablet)) {
-                        padding: 0 $margin-padding-default * 2 0 $margin-padding-default * 2;
+
+                    @media screen and (max-width: map-get($breakpoints, tablet)) {
+                        padding: 0 $margin-padding-default / 2 0 $margin-padding-default / 2;
+                        width: 30%;
+                        font-size: 0.7rem;
                     }
                 }
             }
