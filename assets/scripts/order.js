@@ -10,7 +10,7 @@ orderConfirmation.innerHTML +=
 `<h1>${order.firstName}, merci pour votre commande !</h1>
 
 <h2>Numéro de commande : <br>${order.orderRef}</h2>
-<h2>Prix total : <br>${order.totalCost} euros</h2>
+<h2>Prix total : <br>${order.totalCost.toFixed(2)} euros</h2>
 <h2>A bientôt chez Orinoco !</h2>
 <a href="../index.html">Revenir à l'accueil</a>`
 }
