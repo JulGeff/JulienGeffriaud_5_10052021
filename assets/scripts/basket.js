@@ -2,7 +2,7 @@ let basketData = [];
 
 // Get all localStorage data in a single array
 function allStorage() {
-   
+    basketData = []
     keys = Object.keys(localStorage),
         i = keys.length;
 
@@ -10,8 +10,6 @@ function allStorage() {
         basketData.push(localStorage.getItem(keys[i]));
     }
 }
-
-
 
 allStorage();
 
@@ -24,7 +22,6 @@ let qt = document.getElementsByClassName("qt");
 let basketLine = document.getElementById("table_body");
 let submit = document.getElementById("submit");
 
-displayBasket();
 
 // Insertion des données du localStorage dans la table html
 function displayBasket() { 
@@ -43,6 +40,7 @@ function displayBasket() {
     } 
 }
 
+displayBasket();
 
 //FONCTIONS APPELLES DANS displayBasket()
 
@@ -77,7 +75,7 @@ function total (newLine)  {
 function addQtChoices() { 
     for (let i = 0; i < qt.length; i++) {
 
-        let quantity = qt[i].selectedOptions[0].text;
+        let quantity = qt[i].selectedOptions[0].text; // retourne la quantité sélectionnée
     
 
         for (let j = 1; j < 10; j++) {
@@ -86,9 +84,9 @@ function addQtChoices() {
             opt.value = j;
             opt.text = j;
             if (j < quantity) {
-                qt[i].add(opt, qt[i].selectedOptions[0]);
+                qt[i].add(opt, qt[i].selectedOptions[0]);  //place les qts inférieures à la quantité sélectionnée plus haut dans le menu déroulant
 
-            } else {
+            } else {                //place les qts supérieures à la quantité sélectionnée plus bas dans le menu déroulant
                 if (j > quantity) {
                     qt[i].add(opt);
                 }
@@ -109,13 +107,15 @@ function basketDelete () {
     let lineDeletion = document.getElementsByClassName("delete")
 
     for (let i = 0; i < basketLines.length; i++)
-    lineDeletion[i].addEventListener('click', function () {
-    localStorage.removeItem(id[i].innerText);
-    location.reload() //recharge la page à chaque suppression de ligne du panier
+        lineDeletion[i].addEventListener('click', function () {
+            localStorage.removeItem(id[i].innerText);
+            basketLine.innerHTML = "";
+            allStorage();
+            displayBasket();
 
     })}
 
-basketDelete ();
+basketDelete();
 
 //Enregistrement événement modification de quantité dans le local storage
 function newQt() { 
@@ -150,7 +150,7 @@ function newQt() {
         })
        
     };
-   
+    
 }
 
 newQt();
@@ -158,9 +158,46 @@ newQt();
 
 //FIN MISE A JOUR DU PANIER
 
-
-
 //ENVOI DE LA COMMANDE A l'API
+
+
+
+
+function send(e) {
+    
+    orderStorage();
+    if (products.length === 0) {
+        e.preventDefault();
+        document.getElementById("contact").appendChild(newp).innerHTML = "Votre panier est vide ! <br> Veuillez sélectionner un produit"
+
+    } else {
+        let contact = contactCreation();
+        let order = { contact : contact, products : products }
+        
+        let sendOptions = {
+            method: 'POST',
+            body: JSON.stringify(order),
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+          }
+
+        fetch("http://localhost:3000/api/cameras/order", sendOptions)
+            .then((response) => response.json())
+            .then((json) => {   
+                let orderResponse = { orderRef : json.orderId ,totalCost : totalCost, firstName : contact.firstName }
+                localStorage.clear ()
+                localStorage.setItem("order", JSON.stringify(orderResponse))
+
+        })
+    }
+}
+ 
+  
+  document
+    .getElementById("form")
+    .addEventListener("submit", send);
+
+
+    //FONCTIONS APPELLEES DANS send()
 
 // Récupération des ID de la commande dans le localStorage
 let products = []; 
@@ -175,19 +212,8 @@ function orderStorage() {
     }  
 }
 
-
-
-//Envoi des données du panier à l'API
-
-function send(e) {
- 
-    orderStorage()
-    if (products.length === 0) {
-        e.preventDefault();
-        document.getElementById("contact").appendChild(newp).innerHTML = "Votre panier est vide ! <br> Veuillez sélectionner un produit"
-
-    } else {
-    
+//Création de l'objet contact
+function contactCreation() {
     let firstName = document.getElementById("first_name").value;
     let lastName = document.getElementById("last_name").value;
     let address = document.getElementById("address").value;
@@ -200,32 +226,12 @@ function send(e) {
         city : city,
         email : email,
     }
+    
+    return contact;
+    
+}
 
-    let order = { contact : contact, products : products }
     
     
-    fetch("http://localhost:3000/api/cameras/order", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json', 
-        'Content-Type': 'application/json'
-      },
 
-      body : JSON.stringify(order)
-    })
-    .then((response) => response.json())
-    .then((json) => {
-        
-      let orderResponse = { orderRef : json.orderId ,totalCost : totalCost, firstName : firstName }
-      localStorage.clear ()
-      localStorage.setItem("order", JSON.stringify(orderResponse))
-      
-    })
-   
-    
-  }  } 
-  
-  document
-    .getElementById("form")
-    .addEventListener("submit", send);
   

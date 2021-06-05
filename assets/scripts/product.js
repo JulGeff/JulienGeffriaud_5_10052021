@@ -7,9 +7,9 @@ fetch(`http://localhost:3000/api/cameras/${id}`) // récupération de l'ID situ�
     .then((response) => response.json())
     .then(function (camera) {
         console.log(camera);
-        productPage(camera);  // création de la fiche produit
-        lensesOptions(camera);// affichage des options de lenses
-        basket(camera);
+        productPage(camera);    // création de la fiche produit
+        lensesOptions(camera);  // affichage des options de lenses
+        basket(camera);         // Stockage de l'ID, option et de la quantité associée dans localStorage
     })
 
     
@@ -112,10 +112,7 @@ function basket(camera) {
             
                 } else {
                 document.getElementById("verif_message").innerHTML = "Produit déjà ajouté au panier"; // si id déjà stocké dans local storage, remonter message "déjà ajouté au panier"
-        }
-            
-        }  
-
+        }}  
     })
 };
 
