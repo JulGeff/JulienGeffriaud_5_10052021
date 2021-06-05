@@ -15,10 +15,14 @@ orderConfirmation.innerHTML +=
 <a href="../index.html">Revenir à l'accueil</a>`
 }
 
-displayOrder ()
+displayOrder ();
 
 
 // On vide le local Storage quand on quitte la page
+function emptyOrder () {
 window.onbeforeunload = function(){
     localStorage.clear () 
  }
+}
+
+emptyOrder ();
