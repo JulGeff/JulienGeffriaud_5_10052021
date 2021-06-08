@@ -111,11 +111,6 @@ function basketDelete () {
         lineDeletion[i].addEventListener('click', function () {
             localStorage.removeItem(id[i].innerText);
             location.reload() //recharge la page
-            
-            
-            /*basketLine.innerHTML = "";
-            allStorage();
-            displayBasket();*/
 
     })}
 

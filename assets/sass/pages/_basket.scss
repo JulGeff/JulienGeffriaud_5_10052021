@@ -32,7 +32,7 @@
                 }
             }
 
-            td {
+            td {text-align: left;
                 @media screen and (max-width: map-get($breakpoints, mobile)) {
                     display: block;
                     text-align: right;

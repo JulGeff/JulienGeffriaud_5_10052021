@@ -23,7 +23,9 @@
 
     img {
         position: relative;
-        width: 30%;
+        max-width : 28%;
+        height: auto;
+    
         border-radius: $radius;
         margin-left: $margin-padding-default * 6;
         box-shadow: -1px 3px 12px 4px rgba(0, 0, 0, 0.1);
