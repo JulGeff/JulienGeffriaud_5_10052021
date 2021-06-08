@@ -11,6 +11,9 @@ fetch(`http://localhost:3000/api/cameras/${id}`) // récupération de l'ID situ�
         lensesOptions(camera);  // affichage des options de lenses
         basket(camera);         // Stockage de l'ID, option et de la quantité associée dans localStorage
     })
+        .catch(x => { // gestion des erreurs en cas de fail d'API
+        console.log(x);  
+        })
 
     
 //FONCTIONS APPELEES

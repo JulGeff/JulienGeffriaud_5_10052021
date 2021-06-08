@@ -27,6 +27,7 @@ let submit = document.getElementById("submit");
 function displayBasket() { 
 
     if (window.localStorage.length === 0) {  // Si localStorage vide, remonter "panier vide"
+        newh2.innerHTML = "";
         basketEntry.innerText = "Votre panier est vide"
     } else { 
         basketData.forEach((cam, index) => { // Sinon écrire chaque élément du local storage dans une ligne de tableau et calculer somme totale
@@ -109,9 +110,12 @@ function basketDelete () {
     for (let i = 0; i < basketLines.length; i++)
         lineDeletion[i].addEventListener('click', function () {
             localStorage.removeItem(id[i].innerText);
-            basketLine.innerHTML = "";
+            location.reload() //recharge la page
+            
+            
+            /*basketLine.innerHTML = "";
             allStorage();
-            displayBasket();
+            displayBasket();*/
 
     })}
 
@@ -171,6 +175,7 @@ function send(e) {
         document.getElementById("contact").appendChild(newp).innerHTML = "Votre panier est vide ! <br> Veuillez sélectionner un produit"
 
     } else {
+        
         let contact = contactCreation();
         let order = { contact : contact, products : products }
         
@@ -186,8 +191,12 @@ function send(e) {
                 let orderResponse = { orderRef : json.orderId ,totalCost : totalCost, firstName : contact.firstName }
                 localStorage.clear ()
                 localStorage.setItem("order", JSON.stringify(orderResponse))
-
+                document.location.href = "order.html"
         })
+            .catch(x => { // gestion des erreurs en cas de fail d'API
+                console.log(x);  
+                })
+          
     }
 }
  
