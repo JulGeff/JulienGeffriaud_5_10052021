@@ -9,6 +9,8 @@ function allStorage() {
     while (i--) {
         basketData.push(localStorage.getItem(keys[i]));
     }
+
+    return basketData;
 }
 
 allStorage();
@@ -121,8 +123,15 @@ function basketDelete () {
         lineDeletion[i].addEventListener('click', function () {
             localStorage.removeItem(id[i].innerText);
             location.reload() //recharge la page
+            //basketLine.innerHTML="";
+            //allStorage();
+            //displayBasket();
+         }) 
+      
+       
 
-    })}
+    }
+  
 
 basketDelete();
 

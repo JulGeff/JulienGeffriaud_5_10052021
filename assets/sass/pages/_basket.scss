@@ -32,7 +32,8 @@
                 }
             }
 
-            td {text-align: left;
+            td {
+                text-align: left;
                 @media screen and (max-width: map-get($breakpoints, mobile)) {
                     display: block;
                     text-align: right;
@@ -44,6 +45,10 @@
                         font-weight: bold;
                         float: left;
                     }
+                }
+
+                svg {
+                    width: 1rem;
                 }
             }
 
