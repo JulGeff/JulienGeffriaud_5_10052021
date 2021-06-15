@@ -1,4 +1,5 @@
 #basket {
+    
     main {
         h1 {
             text-align: center;
@@ -25,6 +26,11 @@
                 width: 80%;
             }
 
+            img {
+                max-width : 100px;
+                height : auto;
+            }
+
             th {
                 text-align: left;
                 @media screen and (max-width: map-get($breakpoints, mobile)) {
@@ -34,9 +40,12 @@
 
             td {
                 text-align: left;
+                vertical-align: middle;
                 @media screen and (max-width: map-get($breakpoints, mobile)) {
                     display: block;
                     text-align: right;
+
+              
                 }
 
                 &::before {

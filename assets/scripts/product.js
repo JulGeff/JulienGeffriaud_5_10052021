@@ -101,7 +101,7 @@ function basket(camera) {
         let newp = document.createElement("p");
         newp.setAttribute("id", "verif_message")
         prod.appendChild(newp).innerHTML = "";
-        let product = {id:id, cam:camera.name, option:option, quantity:quantity, price:camera.price / 1000};
+        let product = {id:id, cam:camera.name, option:option, quantity:quantity, price:camera.price / 1000, imageUrl : camera.imageUrl};
 
         if (document.getElementById("lenses-select").selectedIndex === 0) { 
         
