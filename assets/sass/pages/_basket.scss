@@ -99,7 +99,7 @@
     }
 
     input {
-        width: 250px;
+        width: 200px;
         @media screen and (max-width: map-get($breakpoints, tablet-landscape)) {
             width: 65%;
         }

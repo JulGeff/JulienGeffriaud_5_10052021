@@ -18,7 +18,7 @@ fetch(`http://localhost:3000/api/cameras/${id}`) // récupération de l'ID situ�
     
 //FONCTIONS APPELEES
 // création de la fiche produit dans le code HTML
-function productPage(camera, index) {
+function productPage (camera, index) {
     main.innerHTML += `
         <h1>Craquez pour le ${camera.name}!</h1>
         <section>
@@ -28,7 +28,7 @@ function productPage(camera, index) {
                     <h2>Description du ${camera.name}</h2>
                     <p>${camera.description}</p>
                     <p>
-                        <label for="lenses">Lentilles : </label>
+                        <label for="lenses-select">Lentilles : </label>
                         <select name="lenses" id="lenses-select">
                             <option value="" selected>--choisissez une option--</option> 
                         </select>
@@ -56,7 +56,7 @@ function productPage(camera, index) {
 }
 
 // Insertion des options de lenses pour chaque appareil 
-function lensesOptions(camera) {
+function lensesOptions (camera) {
     camera.lenses.forEach((lens, index) => {
         function displayLensOption() {
             let lensesOptions = document.getElementById('lenses-select');
@@ -64,14 +64,14 @@ function lensesOptions(camera) {
                 `<option>${camera.lenses[index]}</option>`
         };
 
-        displayLensOption();
+        displayLensOption ();
 
     })
 }
 
 //AJOUT AU PANIER
 // Récupération option choisie
-function chosenOption() {
+function chosenOption () {
    
     let opt = document.getElementById("lenses-select");
     let option = opt[opt.selectedIndex].text;
@@ -80,7 +80,7 @@ function chosenOption() {
 };
 
 // Récupération quantité choisie
-function chosenQt() {
+function chosenQt () {
     let qt = document.getElementById("qt");
     let quantity = qt.selectedIndex + 1;
     return quantity;
@@ -89,7 +89,7 @@ function chosenQt() {
 
 
 // Stockage de l'ID, option et de la quantité associée dans localStorage
-function basket(camera) {
+function basket (camera) {
 
     const button = document.getElementById('button');     // On récupère l'élément sur lequel on veut détecter le clic
     button.addEventListener('click', function () {        // On écoute l'événement click

@@ -1,7 +1,7 @@
 let basketData = [];
 
 // Get all localStorage data in a single array
-function allStorage() {
+function allStorage () {
     basketData = []
     keys = Object.keys(localStorage),
         i = keys.length;
@@ -28,40 +28,39 @@ let submit = document.getElementById("submit");
 
 
 // Insertion des données du localStorage dans la table html
-function displayBasket() {
+function displayBasket () {
 
     if (window.localStorage.length === 0) { // Si localStorage vide, remonter "panier vide"
         newh2.innerHTML = "";
-        basketEntry.innerText = "Votre panier est vide"
+        basket.innerHTML = "<h2>Votre panier est vide</h2>"
     } else {
         basketData.forEach((cam, index) => { // Sinon écrire chaque élément du local storage dans une ligne de tableau et calculer somme totale
 
             let newLine = JSON.parse(basketData[index]);
             tableFulfill(newLine);
             total(newLine);
-        })
+    })
 
         addQtChoices();
     }
 }
 
-displayBasket();
+displayBasket ();
 
 //FONCTIONS APPELLES DANS displayBasket()
 
 //Création d'une nouvelle ligne de table html 
-function tableFulfill(newLine) {
+function tableFulfill (newLine) {
     basketLine.innerHTML +=
         `<tr>
-        <td><img src="${newLine.imageUrl}"></td>
+        <td><img src="${newLine.imageUrl}" alt="appareil photo"></td>
         <td class="id" data-label="Référence">${newLine.id}</td>
         <td class="product-name" data-label="Produit">${newLine.cam}</td>
         <td class="option" data-label="Option">${newLine.option}</td>
         <td data-label="Quantité">
-            <label for="qt"></label>
-                <select class="qt" name="q">
-                    <option value="selected" selected>${newLine.quantity}</option>
-                </select>
+            <select class="qt" name="q">
+                <option value="selected" selected>${newLine.quantity}</option>
+            </select>
         </td>        
         <td class="price" data-label="Prix unitaire">${newLine.price} €</td>
         <td data-label="Total article">${(newLine.price * newLine.quantity).toFixed(2)} €</td>
@@ -71,18 +70,16 @@ function tableFulfill(newLine) {
 
 
 //Calcul et affichage du coût total
-function total(newLine) {
+function total (newLine) {
     totalCost = totalCost + (newLine.price * newLine.quantity);
     basket.appendChild(newh2).innerHTML = `Le montant total de votre commande est de ${totalCost.toFixed(2)} €`; // affiche le total de la commande
 }
 
 
 // Ajout du menu déroulant de sélection de quantité
-function addQtChoices() {
+function addQtChoices () {
     for (let i = 0; i < qt.length; i++) {
-
         let quantity = qt[i].selectedOptions[0].text; // retourne la quantité sélectionnée
-
 
         for (let j = 1; j < 10; j++) {
 
@@ -95,7 +92,7 @@ function addQtChoices() {
             } else { //place les qts supérieures à la quantité sélectionnée plus bas dans le menu déroulant
                 if (j > quantity) {
                     qt[i].add(opt);
-                }
+            }
             }
         }
     }
@@ -108,7 +105,7 @@ function addQtChoices() {
 let basketLines = document.getElementsByClassName("id");
 
 //Suppression d'une ligne du panier au clic sur "Retirer du panier"
-function basketDelete() {
+function basketDelete () {
     let id = document.getElementsByClassName("id")
     let lineDeletion = document.getElementsByClassName("delete")
 
@@ -120,11 +117,11 @@ function basketDelete() {
         })
 }
 
-
-basketDelete();
+ 
+basketDelete ();
 
 //Enregistrement événement modification de quantité dans le local storage
-function newQt() {
+function newQt () {
 
     for (let i = 0; i < qt.length; i++) {
 
@@ -157,14 +154,14 @@ function newQt() {
                 };
 
                 localStorage.setItem(id, JSON.stringify(product)); // envoie la nouvelle quantité dans le local storage          
-                location.reload() //recharge la page
+                location.reload () //recharge la page
 
             }
         })
     };
 }
 
-newQt();
+newQt ();
 
 
 //FIN MISE A JOUR DU PANIER
@@ -174,16 +171,16 @@ newQt();
 
 
 
-function send(e) {
+function send (e) {
 
-    orderStorage();
+    orderStorage ();
     if (products.length === 0) {
         e.preventDefault();
         document.getElementById("contact").appendChild(newp).innerHTML = "Votre panier est vide ! <br> Veuillez sélectionner un produit"
 
     } else {
 
-        let contact = contactCreation();
+        let contact = contactCreation ();
         let order = {
             contact: contact,
             products: products
@@ -226,7 +223,7 @@ document
 // Récupération des ID de la commande dans le localStorage
 let products = [];
 
-function orderStorage() {
+function orderStorage () {
     keys = Object.keys(localStorage),
         i = keys.length;
 
@@ -237,7 +234,7 @@ function orderStorage() {
 }
 
 //Création de l'objet contact
-function contactCreation() {
+function contactCreation () {
     let firstName = document.getElementById("first_name").value;
     let lastName = document.getElementById("last_name").value;
     let address = document.getElementById("address").value;

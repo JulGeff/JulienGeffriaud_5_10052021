@@ -6,13 +6,13 @@ let order = JSON.parse(localStorage.getItem('order'));
 let orderConfirmation = document.getElementById("order");
 
 function displayOrder () {
-orderConfirmation.innerHTML +=                 
-`<h1>${order.firstName}, merci pour votre commande !</h1>
+    orderConfirmation.innerHTML +=                 
+    `<h1>${order.firstName}, merci pour votre commande !</h1>
 
-<h2>Numéro de commande : <br>${order.orderRef}</h2>
-<h2>Prix total : <br>${order.totalCost.toFixed(2)} euros</h2>
-<h2>A bientôt chez Orinoco !</h2>
-<a href="../index.html">Revenir à l'accueil</a>`
+    <h2>Numéro de commande : <br>${order.orderRef}</h2>
+    <h2>Prix total : <br>${order.totalCost.toFixed(2)} euros</h2>
+    <h2>A bientôt chez Orinoco !</h2>
+    <a href="../index.html">Revenir à l'accueil</a>`
 }
 
 displayOrder ();
@@ -22,7 +22,7 @@ displayOrder ();
 function emptyOrder () {
 window.onbeforeunload = function(){
     localStorage.clear () 
- }
+}
 }
 
 emptyOrder ();

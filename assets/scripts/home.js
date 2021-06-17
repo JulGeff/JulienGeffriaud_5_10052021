@@ -21,9 +21,6 @@ function displayCamera(camera, index) {
             <div class="camera__subtitle">
                 <h2>${camera.name}</h2>
                 <h2>${camera.price / 1000} €</h2>
-                <button class="buttons">
-                    + d'infos
-                </button>
             </div>
         </a>
     </li>`
