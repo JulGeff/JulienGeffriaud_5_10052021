@@ -249,9 +249,9 @@ function contactCreation () {
     } 
 
    
-    if ((firstName = /^[a-zA-Z']+[-_]*[a-zA-Z']+$/.test(firstName))
-    && (lastName = /^[a-zA-Z']+[-_]*[a-zA-Z']+$/.test(lastName))
-    && (city = /^[a-zA-Z']+[-_]*[a-zA-Z']+$/.test(city))
+    if ((firstName = /^[a-zA-Z0-9 \-']+$/.test(firstName))
+    && (lastName = /^[a-zA-Z0-9 \-']+$/.test(lastName))
+    && (city = /^[a-zA-Z0-9 \-']+$/.test(city))
     && (address = /^[a-zA-Z0-9 \-']+$/.test(address))
     && (email = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) 
 
