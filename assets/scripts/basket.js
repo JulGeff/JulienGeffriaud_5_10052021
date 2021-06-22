@@ -246,7 +246,19 @@ function contactCreation () {
         address: address,
         city: city,
         email: email,
-    }
+    } 
 
+   
+    if ((firstName = /^[a-zA-Z']+[-_]*[a-zA-Z']+$/.test(firstName))
+    && (lastName = /^[a-zA-Z']+[-_]*[a-zA-Z']+$/.test(lastName))
+    && (city = /^[a-zA-Z']+[-_]*[a-zA-Z']+$/.test(city))
+    && (address = /^[a-zA-Z0-9 \-']+$/.test(address))
+    && (email = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(email)) 
+
+) { 
     return contact;
-}
+
+} else {
+
+    alert("Format de coordonnées invalide");
+}}
